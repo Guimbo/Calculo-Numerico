@@ -25,7 +25,7 @@ void converteOctal(int Inteiro,double Fracionario,int *resultado){
     }
 }
 
-// Conversão para binário feito
+// Conversï¿½o para binï¿½rio feito
 void converteBinario(int Inteiro,double Fracionario,int *resultado){
     int i,j,k,m;
     double aux;
@@ -48,8 +48,9 @@ void converteBinario(int Inteiro,double Fracionario,int *resultado){
 }
 
 void converteHexa(int Inteiro,double Fracionario,int *resultado){
-    int i,j,k,m;
+    int i,j,k,m, tmp;
     double aux;
+    char LETTERS[] = {'A', 'B', 'C', 'D', 'E', 'F'};
 
     for(i=0;Inteiro>=1;i++){
         resultado[i] = Inteiro % 16;
@@ -57,55 +58,15 @@ void converteHexa(int Inteiro,double Fracionario,int *resultado){
     }
 
     for(j = i-1;j>=0;j--){
-        if(resultado[j] == 10){
-            printf("A");
-        }
-        else if(resultado[j]==11){
-                printf("B");
-        }
-        else if(resultado[j]==12){
-                printf("C");
-        }
-        else if(resultado[j]==13){
-                printf("D");
-        }
-        else if(resultado[j]==14){
-                printf("E");
-        }
-        else if(resultado[j]==11){
-                printf("F");
-        }
-        else{
-            printf("%d",resultado[j]);
-        }
-
+        (resultado[j] <= 9 || resultado[j] >=16) ? printf("%d",resultado[j]) : printf("%c", LETTERS[resultado[j] - 10]);
     }
     printf(",");
 
     for(k =i;Fracionario!=0 && k<=19;k++){
         Fracionario = Fracionario * 16;
         Fracionario = modf(Fracionario,&aux);
-        if((int) aux == 10){
-            printf("A");
-        }
-        else if((int) aux ==11){
-                printf("B");
-        }
-        else if((int) aux == 12){
-                printf("C");
-        }
-        else if((int) aux ==13){
-                printf("D");
-        }
-        else if((int) aux ==14){
-                printf("E");
-        }
-        else if((int) aux == 15){
-                printf("F");
-        }
-        else{
-            printf("%d",(int) aux);
-        }
+        tmp = (int) aux;
+        (tmp <= 9 || tmp >=16) ? printf("%d",tmp) : printf("%c", LETTERS[tmp - 10]);
     }
 }
 
@@ -114,7 +75,7 @@ void converteNumero(){
     double teste;
     int parteInteira;
     double parteFracionaria;
-    int  *resultado; //Armazena o resultado das sucessivas divisões
+    int  *resultado; //Armazena o resultado das sucessivas divisï¿½es
 
     printf("Digite o numero decimal ");
     scanf("%lf",&teste);
@@ -125,7 +86,7 @@ void converteNumero(){
     resultado = malloc(sizeof(resultado)*30);
 
     if(resultado == NULL){
-        printf("Não alocado Falta de memoria");
+        printf("Nï¿½o alocado Falta de memoria");
     }
 
 
@@ -139,8 +100,8 @@ void converteNumero(){
 
 
 double **alocaMatriz(int numLinhas, int numColunas){
-    /*Se tiver memória disponível, aloca uma matriz de double com L linhas e c Colunas
-      e devolve um ponteiro para essa matriz; Caso contrário, devolve um ponteiro nulo.*/
+    /*Se tiver memï¿½ria disponï¿½vel, aloca uma matriz de double com L linhas e c Colunas
+      e devolve um ponteiro para essa matriz; Caso contrï¿½rio, devolve um ponteiro nulo.*/
     double **matriz;
     int i, j;
     matriz = malloc(sizeof(double *)*numLinhas);
@@ -226,9 +187,9 @@ void jordan(double **m,int n, int *colunas){
 
 
 int sretro(double **m, int n, double x[]){
-    /*Recebe m, a matriz aumentada de um SL TS com n variáveis.
-    Se o SL for determinado, armazena em x a solução do SL e dovolve 0;
-    Se for indeterminado, armazena uma solução do SL e devolve 1;*/
+    /*Recebe m, a matriz aumentada de um SL TS com n variï¿½veis.
+    Se o SL for determinado, armazena em x a soluï¿½ï¿½o do SL e dovolve 0;
+    Se for indeterminado, armazena uma soluï¿½ï¿½o do SL e devolve 1;*/
     int i, j, tipo = 0;
     double soma;
     for(i = n - 1; i >= 0; i--){
@@ -238,11 +199,11 @@ int sretro(double **m, int n, double x[]){
         }
         if(m[i][i] == 0){
             if(fabs(m[i][n] - soma) < EPSILON){
-                x[i] = 0; //Variável Livre
+                x[i] = 0; //Variï¿½vel Livre
                 tipo = 1;
             }
             else{
-                return 2; //SL incompatível
+                return 2; //SL incompatï¿½vel
             }
         }
         else{
@@ -306,8 +267,8 @@ float calculaL(int grau,int coeficientes[]){
     //n: grau do polinomio
     int n=grau;
 
-    // k: maior índice dentre os índices dos coeficientes negativos
-    // b: módulo  do menor coeficiente negativo
+    // k: maior ï¿½ndice dentre os ï¿½ndices dos coeficientes negativos
+    // b: mï¿½dulo  do menor coeficiente negativo
     // an: coeficiente do x?n
     int an,b,k,i;
 
@@ -452,14 +413,14 @@ int main(){
     while(entradaUsuario != 'F'){
         printf("C - Conversao \n");
         printf("S - Sistema Linear \n");
-        printf("E - Equaçao Algébrica \n");
+        printf("E - Equaï¿½ao Algï¿½brica \n");
         printf("F - Finalizar \n\n");
         printf("Escolha uma opcao\n\n");
         //Limpar o buffer no Windows
         fflush(stdin);
         //Limpar o buffer no Linux
-        fpurge(stdin);
-        scanf("%c",&entradaUsuario);
+        //fpurge(stdin);
+        scanf(" %c",&entradaUsuario);
         if(entradaUsuario == 'C'){
             converteNumero();
             printf("\n\n");
@@ -468,7 +429,7 @@ int main(){
             //Limpar o buffer no Windows
             fflush(stdin);
             //Limpar o buffer no Linux
-            fpurge(stdin);
+            //fpurge(stdin);
             printf("digite o nome do arquivo \n");
             gets(fileName);
             strcat(fileName,".txt\0");
